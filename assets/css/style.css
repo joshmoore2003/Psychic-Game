@@ -1,0 +1,15 @@
+Body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 20px;
+    font-size: 15px;
+}
+
+p {
+    line-height: 30px;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 60px;
+}
