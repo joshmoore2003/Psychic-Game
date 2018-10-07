@@ -3,7 +3,7 @@ var notComputerChoices = ["m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w",
 
 var wins = 0;
 var losses = 0;
-var guessesLeft = 10;
+var guessesLeft = 5;
 var yourGuessSoFar = 0;
 
 var directionsText = document.getElementById("directions-text");
@@ -11,43 +11,52 @@ var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 var guessesLeftText = document.getElementById("guesses-left-text");
 var guessesSoFarText = document.getElementById("guesses-so-far-text");
+//var userGuess;
+var userGuesses = [];
+
 
 document.onkeyup = function (event) {
-    var userGuess = event.key;
+    userGuess = event.key;
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    
 
     var newGame = function () {
-        guessesLeft="10";
+        guessesLeft="5";
         yourGuessSoFar="";
+        userGuesses = [];
     }
 
-    var soFar = function() {
-        document.getElementById("guesses-so-far-text").innerHTML = "Guesses so far: " + computerChoices.join(", ");
-     };
+    
 
     if (userGuess === computerGuess) {
         wins++;
-        alert("You Won! Congrats!");
         newGame();
+        alert("You Won! Congrats!");
+        
     } else {
-        guessesLeft--
+        userGuesses.push(userGuess);
+        document.getElementById("guesses-so-far-text").innerHTML = "Guesses so far: " + userGuesses.join(", ");
+        guessesLeft--;
     }
 
 
     if (userGuess >= notComputerChoices) {
         alert("Please choose a letter a-m")
+        guessesLeft++;
     }
 
     if (guessesLeft === 0) {
         losses++;
-        alert("Game Over. Better Luck Next Time!");
         newGame();
+        alert("Game Over. Better Luck Next Time!");
+        
     }
 
     winsText.textContent = "Wins: " + wins;
     lossesText.textContent = "Losses: " + losses;
     guessesLeftText.textContent = "Guesses Left: " + guessesLeft;
-    guessesSoFarText.textContent = "Guesses So Far: " + userGuess;
+    //guessesSoFarText.textContent = "Guesses So Far: " + userGuess;
+
 }
 
 
